@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TASKLAB_ENV_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+TASKLAB_ROOT="$(cd "$TASKLAB_ENV_LIB_DIR" && git rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -z "$TASKLAB_ROOT" ]]; then
+  echo "Unable to locate TaskLab git root (required to source tasklab/lib/bash/env.sh)." >&2
+  exit 1
+fi
+
+# shellcheck disable=SC1091
+source "$TASKLAB_ROOT/tasklab/lib/bash/env.sh"
+# shellcheck disable=SC1091
+source "$TASKLAB_ROOT/tasklab/lib/bash/install.sh"
+# shellcheck disable=SC1091
+source "$TASKLAB_ROOT/tasklab/lib/bash/task-script.sh"
+# shellcheck disable=SC1091
+source "$TASKLAB_ROOT/tasklab/lib/bash/stripe.sh"
+
+tasklab_env_validate_stripe() {
+  local env_file="$1"
+  tasklab_stripe_validate_webhook_common "$env_file"
+}

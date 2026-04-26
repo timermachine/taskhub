@@ -1,0 +1,12 @@
+## Runtime artifacts — never commit these
+**/.env
+**/*.env.local
+**/inputs.yaml
+**/node_modules/
+**/tasklab-portal.html
+
+## Reports contain run evidence — keep local
+**/outputs/reports/
+
+## OS
+.DS_Store
