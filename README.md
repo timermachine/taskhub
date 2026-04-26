@@ -1,6 +1,13 @@
 # TaskHub
 
-Curated community tasks for [TaskLab](https://github.com/timermachine/TaskLab) — service integration playbooks.
+![Status](https://img.shields.io/badge/status-pre--alpha-orange) ![Version](https://img.shields.io/badge/version-0.1-lightgrey)
+
+> [!WARNING]
+> **Pre-alpha — not ready for use.** Tasks are seeded but not yet verified end-to-end. Watch or star to follow progress.
+
+---
+
+Curated community tasks for [TaskLab](https://github.com/timermachine/tasklab) — service integration playbooks.
 
 ## What's here
 
