@@ -1,0 +1,56 @@
+type: hitl_web_step
+id: dashboard_step_01
+title: "Create/select PayPal sandbox REST app and collect credentials"
+
+account_required:
+  service: "paypal"
+  signup_url: "https://developer.paypal.com/"
+  note: "A PayPal Developer account is required. Use sandbox credentials first; do not paste live credentials into a sandbox task run."
+
+target:
+  service: "paypal"
+  entry_url: "https://developer.paypal.com/dashboard/applications/sandbox"
+
+doc_check:
+  docs:
+    - label: "Get started with PayPal REST APIs"
+      url: "https://developer.paypal.com/api/rest/"
+    - label: "REST API authentication"
+      url: "https://developer.paypal.com/api/rest/authentication/"
+
+ui_expectation:
+  page_name: "Apps & Credentials"
+  expected_labels:
+    - "Sandbox"
+    - "REST API apps"
+    - "Client ID"
+    - "Secret"
+
+actions:
+  - kind: navigate
+    label: "Open PayPal sandbox Apps & Credentials"
+    url: "https://developer.paypal.com/dashboard/applications/sandbox"
+  - kind: choose
+    label: "Select an existing REST app or create a new app"
+    locator_hint: "REST API apps > app name or Create App"
+  - kind: copy
+    label: "Copy sandbox client ID"
+    locator_hint: "Client ID"
+  - kind: copy
+    label: "Reveal and copy sandbox client secret"
+    locator_hint: "Secret"
+  - kind: note
+    label: "Persist value (copy once)"
+    text: "Paste into your project .env (gitignored): PAYPAL_CLIENT_ID= and PAYPAL_CLIENT_SECRET=. Keep PAYPAL_ENVIRONMENT=sandbox."
+
+clipboard:
+  - label: "Sandbox client ID"
+    value_from: "paypal_client_id"
+    sensitive: true
+  - label: "Sandbox client secret"
+    value_from: "paypal_client_secret"
+    sensitive: true
+
+verify:
+  - kind: checkbox_confirmation
+    label: "Sandbox credentials recorded in project .env (gitignored); no secret values recorded in reports."

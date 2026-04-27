@@ -1,0 +1,14 @@
+service: "paypal"
+verified_on: "2026-04-27"
+tool_versions:
+  node: "checked by 01-preflight.sh"
+  npm: "checked by 01-preflight.sh"
+  curl: "checked by 01-preflight.sh"
+surfaces_checked:
+  - official_docs
+  - dashboard_urls
+  - sandbox_oauth_api
+notes:
+  - "PayPal REST APIs use OAuth 2.0 client credentials with sandbox endpoint https://api-m.sandbox.paypal.com/v1/oauth2/token."
+  - "Client ID and client secret are copied from Developer Dashboard > Apps & Credentials."
+  - "Sandbox account management is available from Developer Dashboard > Sandbox Accounts."

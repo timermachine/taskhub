@@ -1,0 +1,17 @@
+decision:
+  service: "paypal"
+  chosen_surfaces:
+    - step: "Create/select REST app and copy sandbox client ID/client secret"
+      surface: "hitl_web"
+      reason: "PayPal Developer Dashboard app creation and secret reveal require an authenticated browser session and account-specific UI."
+    - step: "Validate credentials and scaffold Node integration"
+      surface: "local_script"
+      reason: "Local scripts can validate tooling, generate code, and call sandbox OAuth once credentials are in the project .env."
+
+steps:
+  - "Review references/; update research.md + references/checked-surfaces.yaml (verified_on + versions)."
+  - "Run outputs/scripts/00-hitl-links.sh (prints deep links + copy-once guidance)."
+  - "Run outputs/scripts/01-preflight.sh."
+  - "Run outputs/scripts/02-scaffold-node-paypal.sh."
+  - "Run outputs/scripts/99-run-tests.sh (automated PayPal integration test; rerun later with tasklab test)."
+  - "HITL: hitl/02-report.step.yaml"
