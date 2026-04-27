@@ -1,0 +1,55 @@
+type: hitl_manual_step
+id: report_step_02
+title: "Complete the setup report with sanitized evidence"
+
+target:
+  service: "local"
+  entry_url: "outputs/reports/setup-report.md"
+
+ui_expectation:
+  page_name: "outputs/reports/setup-report.md"
+  expected_labels:
+    - "Outcome"
+    - "Docs verified"
+    - "Evidence"
+    - "Issues encountered"
+
+actions:
+  - kind: note
+    label: "Set the run outcome"
+    text: "Set Outcome to success if tasklab run completed, or partial if it stopped at a named HITL/failure step."
+  - kind: note
+    label: "Record dependency evidence"
+    text: "Copy sanitized preflight facts only: node path/version, npm path/version, and curl path/version."
+  - kind: note
+    label: "Record generated npm integration files"
+    text: "Record paypal-integration/package.json, load-env.mjs, paypal-client.mjs, test.mjs, smoke-token.mjs, and create-order.example.mjs."
+  - kind: note
+    label: "Record npm test results"
+    text: "Record that tasklab test or 99-run-tests.sh ran npm test --prefix paypal-integration, plus pass/fail counts, whether the PayPal sandbox OAuth check passed, and the sanitized sandbox order ID/status from the create-order check."
+  - kind: note
+    label: "Record optional order evidence"
+    text: "If npm run create-order --prefix paypal-integration was run manually, record only the sandbox order ID and status."
+  - kind: note
+    label: "Keep secrets out"
+    text: "Do not paste PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, OAuth access tokens, full dashboard secrets, .env contents, or screenshots/logs showing secrets."
+
+verify:
+  - kind: checkbox_confirmation
+    auto_complete: false
+    label: "setup-report.md — Outcome: is set to success or partial."
+  - kind: checkbox_confirmation
+    auto_complete: true
+    label: "setup-report.md > Docs verified table — each row has a Verified on date. (agent-filled)"
+  - kind: checkbox_confirmation
+    auto_complete: true
+    label: "setup-report.md > Evidence notes — node, npm, and curl paths/versions are listed. (agent-filled)"
+  - kind: checkbox_confirmation
+    auto_complete: true
+    label: "setup-report.md > Evidence notes — all six paypal-integration/ file paths are listed. (agent-filled)"
+  - kind: checkbox_confirmation
+    auto_complete: true
+    label: "setup-report.md > Evidence notes — npm test pass/fail counts, sandbox OAuth result, and sandbox order ID/status are listed. (agent-filled)"
+  - kind: checkbox_confirmation
+    auto_complete: true
+    label: "setup-report.md — no PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, tokens, or .env values appear anywhere. (agent-confirmed)"
