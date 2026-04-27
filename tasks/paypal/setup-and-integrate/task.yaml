@@ -1,0 +1,58 @@
+dsl_version: "tasklab.hitl.v0.1"
+
+task:
+  id: "paypal.setup_and_integrate"
+  title: "PayPal sandbox setup and Node.js Orders API integration"
+  summary: "Set up PayPal sandbox REST credentials and a minimal Node.js Orders API integration."
+  owner: "community"
+  tags:
+    - "paypal"
+    - "node"
+    - "checkout"
+    - "setup"
+    - "hitl"
+
+context:
+  product: "paypal"
+  environment: "sandbox"
+  assumptions:
+    - "Operator has or can create a PayPal Developer account."
+    - "Sandbox credentials are used first; live credentials are intentionally out of scope."
+    - "The target project is a Node.js project or can accept a generated Node.js helper module."
+  prerequisites:
+    - "Node.js 18 or newer"
+    - "npm"
+    - "curl"
+    - "PayPal Developer Dashboard access"
+
+inputs:
+  - name: "project_root"
+    type: "string"
+    required: true
+  - name: "paypal_environment"
+    type: "string"
+    required: false
+    default: "sandbox"
+
+outputs:
+  - name: "env_file_path"
+    type: "string"
+  - name: "generated_node_helper"
+    type: "string"
+  - name: "setup_report"
+    type: "string"
+
+completion:
+  success_criteria:
+    - "Project .env contains PayPal sandbox client ID and client secret variable names."
+    - "Node PayPal helper exists in project runtime output."
+    - "OAuth token smoke test succeeds against the PayPal sandbox API."
+    - "Generated npm test creates a sandbox PayPal order through the Orders API."
+  evidence_required:
+    - "docs checked (verified_on + URLs)"
+    - "preflight tool paths/versions recorded"
+    - "generated PayPal Node helper file paths recorded"
+    - "99-run-tests.sh pass/fail counts recorded"
+    - "PayPal sandbox OAuth HTTP result recorded without tokens or secrets"
+    - "PayPal sandbox order ID/status recorded without payer data or secrets"
+    - "outputs/reports/setup-report.md completed with no .env values"
